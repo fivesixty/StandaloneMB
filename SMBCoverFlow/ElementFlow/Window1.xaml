@@ -1,0 +1,332 @@
+﻿<Window x:Class="FluidKit.Showcase.ElementFlow.Window1"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		Title="Standalone Media Browser - CoverFlow"
+		Height="720"
+		Width="1280"
+		xmlns:local="clr-namespace:FluidKit.Showcase.ElementFlow"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:smb="clr-namespace:StandaloneMB;assembly=StandaloneMB"
+		xmlns:Controls="clr-namespace:FluidKit.Controls;assembly=FluidKit"
+        xmlns:DShow="clr-namespace:WPFMediaKit.DirectShow.Controls;assembly=WPFMediaKit"
+        x:Name="window"
+		WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        WindowState="Normal"
+        ResizeMode="CanResize"
+        Icon="/Color thang.ico"
+        MouseMove="window_MouseMove"
+        AllowsTransparency="False">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ProgressSlider.xaml" />
+        <ResourceDictionary>
+
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+
+                    <smb:MediaCollection x:Key="TestDataSource" />
+
+                    <LinearGradientBrush x:Key="ReflectionBrush"
+							 StartPoint="0,0"
+							 EndPoint="0,1">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0"
+							  Color="#7FFFFFFF" />
+                    <GradientStop Offset=".5"
+							  Color="Transparent" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+
+            <DataTemplate x:Key="TestDataTemplate"
+					  DataType="{x:Type sys:String}">
+                <Border x:Name="ElementVisual"
+					Background="White"
+					Padding="5"
+					BorderThickness="5"
+					BorderBrush="LightGray"
+					Grid.Row="0">
+                    <Image Source="{Binding}"
+					   Stretch="Fill" />
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="TestDataTemplate_Reflection"
+					  DataType="{x:Type smb:MediaItem}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="0.5*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding Path=title}" FontSize="20" Grid.Row="0" Foreground="White" Background="Transparent">
+                    <TextBlock.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="1.0" Color="Black" Opacity="1.0" Direction="315"/>
+                    </TextBlock.BitmapEffect>
+                </TextBlock>
+                    <Border x:Name="ElementVisual"
+						Background="Transparent"
+						Padding="5"
+						Grid.Row="1">
+                        <Image Source="{Binding Path=folderImage}" Stretch="UniformToFill" />
+                    </Border>
+                    <Rectangle OpacityMask="{StaticResource ReflectionBrush}"
+						   Grid.Row="2">
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{Binding ElementName=ElementVisual}"
+									 RenderOptions.CachingHint="Cache">
+                                <VisualBrush.Transform>
+                                    <ScaleTransform ScaleX="1"
+												ScaleY="-1"
+												CenterX="{Binding Path=transX}"
+												CenterY="{Binding Path=transY}" />
+                                </VisualBrush.Transform>
+                            </VisualBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush x:Name="bgImageBrush" ImageSource="{Binding Path=backdropURI}" Stretch="UniformToFill" />
+    </Window.Background>
+    
+    <Grid x:Name="mainGrid">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0.5*" />
+            <RowDefinition Height="0.2*" />
+			<RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.05*" />
+            <RowDefinition Height="0.05*" />
+        </Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="0.5*" />
+			<ColumnDefinition Width="0.42*" />
+            <ColumnDefinition Width="0.08*" />
+        </Grid.ColumnDefinitions>
+        
+        <!-- Glass Table -->
+        <Rectangle Grid.ColumnSpan="3" Grid.RowSpan="3" Grid.Row="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#AA000000" Offset="0.0" />
+                    <GradientStop Color="#BBDDDDDD" Offset="0.04" />
+                    <GradientStop Color="Transparent" Offset="1.0" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <!-- Element Flow -->
+		<ItemsControl x:Name="_itemsControl" Grid.ColumnSpan="3"
+                      Grid.RowSpan="4"
+					  ItemsSource="{Binding Source={StaticResource TestDataSource}}"
+					  ItemTemplate="{StaticResource TestDataTemplate_Reflection}" Grid.Row="1" FocusVisualStyle="{x:Null}">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<Controls:ElementFlow x:Name="ElementFlow"
+										  Focusable="True"
+										  TiltAngle="45"
+										  ItemGap="0.3"
+										  FrontItemGap="0.45"
+										  PopoutDistance="0.5"
+										  ElementWidth="200"
+										  ElementHeight="600"
+										  HasReflection="True"
+										  Background="Transparent"
+                                          MouseLeftButtonUp="ElementFlow_MouseLeftUp">
+						<Controls:ElementFlow.Camera>
+							<PerspectiveCamera FieldOfView="60"
+											   Position="0,1,3.2"
+											   LookDirection="0,-1,-4"
+											   UpDirection="0,1,0" />
+						</Controls:ElementFlow.Camera>
+					</Controls:ElementFlow>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+		</ItemsControl>
+        
+        <!-- Current Item Name -->
+        <Viewbox Grid.ColumnSpan="3" Grid.Row="4" >
+            <TextBlock Name="MainName" FontStretch="UltraExpanded" Text="{Binding Path=currentItem.title}" FontStyle="Normal" TextAlignment="Center" Foreground="White" HorizontalAlignment="Left">
+                    <TextBlock.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="0.8" Softness="0.2"  Color="Black" Opacity="1.0" Direction="315"/>
+                    </TextBlock.BitmapEffect>
+            </TextBlock>
+        </Viewbox>
+        
+        <!-- Current item index -->
+        <Viewbox Grid.Row="4" Grid.Column="2" Stretch="Uniform" Grid.ColumnSpan="2">
+            <TextBlock Margin="5,5,5,5" Name="Progress" Text="{Binding Path=progress}" FontStyle="Normal" TextAlignment="Right" Foreground="White" HorizontalAlignment="Right">
+                    <TextBlock.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="0.5" Softness="0.5"  Color="Black" Opacity="1.0" Direction="315"/>
+                    </TextBlock.BitmapEffect>
+            </TextBlock>
+        </Viewbox>
+        
+        <!-- Media Player -->
+        <Rectangle
+            Grid.Row="0"
+            Grid.ColumnSpan="{Binding Path=vidColSpan}"
+            Grid.RowSpan="{Binding Path=vidRowSpan}"
+            Fill="Black"
+            Visibility="{Binding Path=videoVisible}"/>
+        <DShow:MediaUriElement x:Name="VideoControl" Stretch="Uniform" LoadedBehavior="Play" UnloadedBehavior="Close"
+                      Volume="1" VideoRenderer="VideoMixingRenderer9" IsRenderingEnabled="True" Source="{Binding Path=videoURL}"
+                        MouseLeftButtonDown="VideoControl_MouseLeftButtonDown"
+                        MouseRightButtonDown="VideoControl_MouseRightButtonDown"
+                        Grid.Row="0"
+                        Grid.ColumnSpan="{Binding Path=vidColSpan}"
+                        Grid.RowSpan="{Binding Path=vidRowSpan}"
+                        SourceUpdated="VideoControl_Loaded">
+            <DShow:MediaUriElement.ContextMenu>
+                <ContextMenu>
+                    <ContextMenu.Resources>
+                        <ResourceDictionary Source="/PresentationFramework.Aero, Version=3.0.0.0, Culture=neutral, 
+                            PublicKeyToken=31bf3856ad364e35, ProcessorArchitecture=MSIL;component/themes/aero.normalcolor.xaml" />
+                    </ContextMenu.Resources>
+                </ContextMenu>
+            </DShow:MediaUriElement.ContextMenu>
+        </DShow:MediaUriElement>
+
+        
+        
+        <!-- Item Overview -->
+        <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Background="#AA000000" Foreground="White" Text="{Binding Path=currentItem.Overview}" TextWrapping="Wrap" Height="Auto" VerticalAlignment="Bottom" Margin="5" Padding="5">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=currentItem.OverviewEmpty}" Value="True">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=currentItem.OverviewEmpty}" Value="False">
+                                <Setter Property="TextBlock.Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            
+        </Grid>
+
+        <!-- Window Controls -->
+        <Grid Grid.Column="1" Grid.ColumnSpan="2">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="84"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Orientation="Horizontal" Focusable="False" x:Name="WindowControls" Opacity="{Binding Path=UIElementOpacity}" Grid.Row="0" Grid.Column="1">
+                <Controls:ImageButton
+                    ImageNormal="/Images/vista_min.png"
+                    ImageHover="/Images/vista_min_hovered.png"
+                    ImagePressed="/Images/vista_min_pressed.png" Click="Minimize_Click" Focusable="False"  />
+                <Controls:ImageButton
+                    ImageNormal="/Images/vista_max.png"
+                    ImageHover="/Images/vista_max_hovered.png"
+                    ImagePressed="/Images/vista_max_pressed.png" Click="MinMax_Click" Focusable="False"  />
+                <Controls:ImageButton
+                    ImageNormal="/Images/vista_close.png"
+                    ImageHover="/Images/vista_close_hovered.png"
+                    ImagePressed="/Images/vista_close_pressed.png" Click="Close_Click" Focusable="False" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Playback Controls -->
+        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="3" Visibility="{Binding Path=videoVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Row="1" x:Name="VideoControls" Opacity="{Binding Path=UIElementOpacity}">
+                
+                <!-- Playback buttons -->
+                <StackPanel Orientation="Horizontal" Height="30">
+                    <Controls:ImageButton
+                        ImageNormal="/Images/BackNormal.png"
+                        ImageHover="/Images/BackHot.png"
+                        ImagePressed="/Images/BackPressed.png" Click="Beginning_Click" Focusable="False"  />
+                    <Controls:ImageButton
+                        ImageNormal="/Images/StopNormal.png"
+                        ImageHover="/Images/StopHot.png"
+                        ImagePressed="/Images/StopPressed.png" Click="Stop_Click" Focusable="False"  />
+                    <Controls:ImageButton
+                        ImageNormal="/Images/PauseNormal.png"
+                        ImageHover="/Images/PauseHot.png"
+                        ImagePressed="/Images/PausePressed.png" Click="Pause_Click" Focusable="False"
+                        Visibility="{Binding Path=videoPlaying, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Controls:ImageButton
+                        ImageNormal="/Images/PlayNormal.png"
+                        ImageHover="/Images/PlayHot.png"
+                        ImagePressed="/Images/PlayPressed.png" Click="Play_Click" Focusable="False">
+                        <Controls:ImageButton.Style>
+                            <Style>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=videoPlaying}" Value="True">
+                                        <Setter Property="Controls:ImageButton.Visibility" Value="Hidden" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=videoPlaying}" Value="False">
+                                        <Setter Property="Controls:ImageButton.Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Controls:ImageButton.Style>
+                    </Controls:ImageButton>
+                </StackPanel>
+                
+                <!-- Volume Control -->
+                <Slider
+                    Minimum="0.7"
+                    Maximum="1"
+                    Value="{Binding Mode=TwoWay, ElementName=VideoControl, Path=Volume}"
+                    LargeChange="0.02" />
+                
+                <!-- Position Control -->
+                <Grid>
+                    <ProgressBar Minimum="0"
+                                 Maximum="{Binding ElementName=VideoControl, Path=MediaDuration}"
+                                 Value="{Binding ElementName=VideoControl, Path=MediaPosition}"
+                                 SmallChange="1" />
+                     <Slider 
+                        x:Name="ProgressSlider"
+                        Minimum="0"
+                        Maximum="{Binding ElementName=VideoControl, Path=MediaDuration}"
+                        Value="{Binding Mode=TwoWay, ElementName=VideoControl, Path=MediaPosition}"
+                        Style="{StaticResource ProgressSliderStyle}"
+                        IsMoveToPointEnabled="True" />
+                    <!--<Slider 
+                        Minimum="0"
+                        Maximum="1000"
+                        x:Name="ProgressSlider"
+                        Style="{StaticResource ProgressSliderStyle}"
+                        IsMoveToPointEnabled="True"
+                        ValueChanged="Slider_ValueChanged" /> -->
+                </Grid>
+                
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>

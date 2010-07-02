@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{18D7F9D1-94C2-45A2-83E1-7B4DE7950F47}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FluidKit.Showcase</RootNamespace>
+    <AssemblyName>FluidKit.Showcase</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ElementFlow\StringCollection.cs" />
+    <Compile Include="ElementFlow\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FluidKit\FluidKit.csproj">
+      <Project>{75541544-BF77-4FDC-B03B-BC0DBEBFB8F5}</Project>
+      <Name>FluidKit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StandaloneMB\StandaloneMB.csproj">
+      <Project>{F7E5CD50-7607-42EB-B8ED-5441E3912A78}</Project>
+      <Name>StandaloneMB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ReferencePath Include="X:\Development\Projects\StandaloneMB\FluidKit\bin\Debug\FluidKit.dll" />
+    <ReferencePath Include="C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.0\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.0\PresentationFramework.dll" />
+    <ReferencePath Include="X:\Development\Projects\StandaloneMB\StandaloneMB\bin\Debug\StandaloneMB.exe" />
+    <ReferencePath Include="C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.5\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.5\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Data.dll" />
+    <ReferencePath Include="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.dll" />
+    <ReferencePath Include="C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.5\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.0\UIAutomationProvider.dll" />
+    <ReferencePath Include="C:\Program Files\Reference Assemblies\Microsoft\Framework\v3.0\WindowsBase.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="X:\Development\Projects\StandaloneMB\SMBCoverFlow\obj\Debug\ElementFlow\Window1.g.cs" />
+    <Compile Include="X:\Development\Projects\StandaloneMB\SMBCoverFlow\obj\Debug\MainWindow.g.cs" />
+    <Compile Include="X:\Development\Projects\StandaloneMB\SMBCoverFlow\obj\Debug\App.g.cs" />
+  </ItemGroup>
+</Project>

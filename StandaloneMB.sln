@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StandaloneMB", "StandaloneMB\StandaloneMB.csproj", "{F7E5CD50-7607-42EB-B8ED-5441E3912A78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluidKit", "FluidKit\FluidKit.csproj", "{75541544-BF77-4FDC-B03B-BC0DBEBFB8F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMBCoverFlow", "SMBCoverFlow\SMBCoverFlow.csproj", "{18D7F9D1-94C2-45A2-83E1-7B4DE7950F47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFMediaKit", "WPFMediaKit\WPFMediaKit.csproj", "{6030628D-EE93-4D61-B6BE-8B6AE99F3935}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7E5CD50-7607-42EB-B8ED-5441E3912A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7E5CD50-7607-42EB-B8ED-5441E3912A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7E5CD50-7607-42EB-B8ED-5441E3912A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7E5CD50-7607-42EB-B8ED-5441E3912A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75541544-BF77-4FDC-B03B-BC0DBEBFB8F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75541544-BF77-4FDC-B03B-BC0DBEBFB8F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75541544-BF77-4FDC-B03B-BC0DBEBFB8F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75541544-BF77-4FDC-B03B-BC0DBEBFB8F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18D7F9D1-94C2-45A2-83E1-7B4DE7950F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18D7F9D1-94C2-45A2-83E1-7B4DE7950F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18D7F9D1-94C2-45A2-83E1-7B4DE7950F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18D7F9D1-94C2-45A2-83E1-7B4DE7950F47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6030628D-EE93-4D61-B6BE-8B6AE99F3935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6030628D-EE93-4D61-B6BE-8B6AE99F3935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6030628D-EE93-4D61-B6BE-8B6AE99F3935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6030628D-EE93-4D61-B6BE-8B6AE99F3935}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
